@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/favicon1.png" type="image/png">
+    <title>Weather</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <% if (locals.data) { %>
+        <div class="content">
+            <div class="main-content">
+                <form action="/" class="search" method="post">
+                    <input type="text" name="city" placeholder="Enter City Name" autocomplete="off">
+                    <button>Show</button>
+                </form>
+                <div class="area">
+                    <h1 class="temp"><span class="value"><%= data.main.temp %></span>°C</h1>
+                    <div class="imglogo">
+                        <img src=<%= icon %> alt="">
+                        <h3 class="description"><%= data.weather[0].description %></h3>
+                    </div>
+                    <h2 class="place"><%= data.name %></h2>
+                    <p><%=  new Date().toLocaleTimeString() %></p>
+                    <p><b><%= new Date().getDate() %>/<% const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]%><%= month[new Date().getMonth()] %>/<%= new Date().getFullYear() %></b></p>
+                </div>
+            </div>
+            <!-- <div class="top">
+            </div> -->
+            <div class="features">
+                <div class="rise box">
+                    <p class="heading">Sunrise</p>
+                    <img src="images/sunrises.png" alt="sunrise">
+                    <p><%= new Date(data.sys.sunrise * 1000).toLocaleTimeString() %></p>
+                </div>
+                <div class="set box">
+                    <p class="heading">Sunset</p>
+                    <img src="images/sunsets.png" alt="sunset">
+                    <p><%= new Date(data.sys.sunset * 1000).toLocaleTimeString() %></p>
+                </div>
+                <div class="wind box">
+                    <p class="heading">Wind</p>
+                    <img src="images/wind.png" alt="rain">
+                    <p><%= data.wind.speed %>m/sec</p>
+                </div>
+                <div class="humidity box">
+                    <p class="heading">Humidity</p>
+                    <img src="images/humidity.png" alt="humidity">
+                    <p><%= data.main.humidity %>%</p>
+                </div>
+                <div class="rain box">
+                   <p class="heading">Range</p>
+                   <img src="images/temps.png" alt="">
+                   <p> <%= data.main.temp_min %>°C / <span><%= data.main.temp_max %>°C</span></p>
+                </div>
+                <div class="feels box">
+                    <p class="heading">Feels Like</p>
+                    <img src="images/temperatures.png" alt="">
+                    <p><%= data.main.feels_like %>°C</p>
+                </div>
+            </div>
+        </div>
+        <% } else { %>
+            <div class="content">
+                <div class="main-content">
+                    <form action="/" class="search" method="post">
+                        <input type="text" name="city" placeholder="Enter City Name">
+                        <button>Show</button>
+                    </form>
+                </div>
+     <% } %>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+     <script src="index.js"></script>
+</body>
+
+</html>
